@@ -43,7 +43,7 @@ const ACCEPTED_SVG_ELEMENTS = [
 
 // Attributes from SVG elements that are mapped directly.
 const SVG_ATTS = ["viewBox", "width", "height"];
-const G_ATTS = ["id"];
+const G_ATTS = ["id", "fill", "textAnchor", "fontFamily"];
 
 const CIRCLE_ATTS = ["cx", "cy", "r"];
 const PATH_ATTS = ["d"];
@@ -51,7 +51,7 @@ const RECT_ATTS = ["width", "height"];
 const LINE_ATTS = ["x1", "y1", "x2", "y2"];
 const LINEARG_ATTS = LINE_ATTS.concat(["id", "gradientUnits"]);
 const RADIALG_ATTS = CIRCLE_ATTS.concat(["id", "gradientUnits"]);
-const STOP_ATTS = ["offset"];
+const STOP_ATTS = ["offset", "stopOpacity", "stopColor"];
 const ELLIPSE_ATTS = ["cx", "cy", "rx", "ry"];
 
 const TEXT_ATTS = ["fontFamily", "fontSize", "fontWeight"];
@@ -76,7 +76,9 @@ const COMMON_ATTS = [
   "scale",
   "origin",
   "originX",
-  "originY"
+  "originY",
+  "stopOpacity",
+  "stopColor"
 ];
 
 let ind = 0;
@@ -164,7 +166,7 @@ class SvgUri extends Component {
   trimElementChilden(children) {
     for (child of children) {
       if (typeof child === "string") {
-        if (child.trim.length === 0)
+        if (child.trim().length === 0)
           children.splice(children.indexOf(child), 1);
       }
     }
@@ -270,9 +272,7 @@ class SvgUri extends Component {
         );
       case "text":
         componentAtts = this.obtainComponentAtts(node, TEXT_ATTS);
-        if (componentAtts.y) {
-          componentAtts.y = fixYPosition(componentAtts.y, node);
-        }
+
         return (
           <Text key={i} {...componentAtts}>
             {childs}
