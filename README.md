@@ -1,14 +1,12 @@
 # react-native-svg-from-uri
 
-> This is a fork of the unmaintained https://github.com/vault-development/react-native-svg-uri
+> This is a fork of the unmaintained [react-native-svg-uri](https://github.com/vault-development/react-native-svg-uri) library, originally written by Matias Cortes.
 
 Render SVG images in React Native from an URL or a static file
 
-This was tested with RN 0.33 and react-native-svg 4.3.1 (depends on this library)
-[react-native-svg](https://github.com/react-native-community/react-native-svg)
+This was tested with RN 0.52.0 and [react-native-svg](https://github.com/react-native-community/react-native-svg) 6.3.1, which this library depends on.
 
-Not all the svgs can be rendered, if you find problems fill an issue or a PR in
-order to contemplate all the cases
+## Installation
 
 Install library from `npm`
 
@@ -16,7 +14,7 @@ Install library from `npm`
 npm install react-native-svg-from-uri --save
 ```
 
-Link library react-native-svg
+Link the **react-native-svg** library
 
 ```bash
 react-native link react-native-svg # not react-native-svg-from-uri !
@@ -35,13 +33,15 @@ react-native link react-native-svg # not react-native-svg-from-uri !
 * [ANDROID] There is a problem with static SVG file on Android,
   Works OK in debug mode but fails to load the file in release mode.
   At the moment the only workaround is to pass the svg content in the svgXmlData prop.
+* Not all the svgs can be rendered, if you find problems fill an issue or a PR in
+  order to contemplate all the cases
 
-## <a name="Usage">Usage</a>
+## Usage
 
 Here's a simple example:
 
 ```javascript
-import SvgUri from "react-native-svg-uri";
+import SvgUri from "react-native-svg-from-uri";
 
 const TestSvgUri = () => (
   <View style={styles.container}>
