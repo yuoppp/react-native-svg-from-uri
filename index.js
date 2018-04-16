@@ -356,6 +356,8 @@ class SvgUri extends Component {
         return null;
       }
 
+      ind = 0;
+
       const inputSVG = this.state.svgXmlData.substring(
         this.state.svgXmlData.indexOf("<svg "),
         this.state.svgXmlData.indexOf("</svg>") + 6
