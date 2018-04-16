@@ -64,7 +64,7 @@ or a static file
 
 This will render:
 
-![Component example](./screenshoots/sample.png)
+![Component example](./screenshots/sample.png)
 
 ## Testing
 
