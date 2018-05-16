@@ -1,28 +1,58 @@
 {
-  "name": "react-native-svg-from-uri",
-  "version": "1.0.2",
-  "description": "Render an SVG Image from an URL",
-  "main": "index.js",
-  "scripts": {
-    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
+  "_from": "git+https://github.com/machour/react-native-svg-from-uri.git",
+  "_id": "react-native-svg-from-uri@1.0.2",
+  "_inBundle": false,
+  "_location": "/react-native-svg-from-uri",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "git+https://github.com/machour/react-native-svg-from-uri.git",
+    "rawSpec": "git+https://github.com/machour/react-native-svg-from-uri.git",
+    "saveSpec": "git+https://github.com/machour/react-native-svg-from-uri.git",
+    "fetchSpec": "https://github.com/machour/react-native-svg-from-uri.git",
+    "gitCommittish": null
   },
-  "keywords": ["react-native", "svg", "url", "uri", "http"],
-  "author": "Matias Cortes",
-  "license": "ISC",
-  "dependencies": {
-    "xmldom": "^0.1.22"
-  },
-  "peerDependencies": {
-    "react-native-svg": "^6.3.1"
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/machour/react-native-svg-from-uri.git#e96fd98d52131a22b0e7d47c1a3a5d4de80d872b",
+  "_spec": "git+https://github.com/machour/react-native-svg-from-uri.git",
+  "_where": "/Users/ytinyukov/Documents/react-native-projects/rent-app",
+  "author": {
+    "name": "Matias Cortes"
   },
   "bugs": {
     "url": "https://github.com/machour/react-native-svg-from-uri/issues"
   },
-  "homepage": "https://github.com/machour/react-native-svg-from-uri#readme",
+  "bundleDependencies": false,
+  "dependencies": {
+    "xmldom": "^0.1.22"
+  },
+  "deprecated": false,
+  "description": "Render an SVG Image from an URL",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-preset-react-native": "^2.1.0",
     "chai": "^3.5.0",
     "mocha": "^3.2.0"
-  }
+  },
+  "homepage": "https://github.com/machour/react-native-svg-from-uri#readme",
+  "keywords": [
+    "react-native",
+    "svg",
+    "url",
+    "uri",
+    "http"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "react-native-svg-from-uri",
+  "peerDependencies": {
+    "react-native-svg": "^6.3.1"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register"
+  },
+  "version": "1.0.2"
 }
