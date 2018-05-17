@@ -49,7 +49,7 @@ const ACCEPTED_SVG_ELEMENTS = [
 const SVG_ATTS = ["viewBox", "width", "height"];
 const G_ATTS = ["id", "fill", "textAnchor", "fontFamily"];
 
-const CIRCLE_ATTS = ["cx", "cy", "r"];
+const CIRCLE_ATTS = ["id", "cx", "cy", "r"];
 const PATH_ATTS = ["d"];
 const RECT_ATTS = ["width", "height", "rx", "ry"];
 const LINE_ATTS = ["x1", "y1", "x2", "y2"];
@@ -116,6 +116,12 @@ class SvgUri extends Component {
 
         this.isComponentMounted = false;
 
+        let handleClickAr = this.props.handleClicks || [];
+        let handleClickObj = {};
+        for (let id of handleClickAr) handleClickObj[id] = 1;
+
+        this.shouldHandleClicks = handleClickObj;
+
         // Gets the image data from an URL or a static file
         if (props.source) {
             const source = resolveAssetSource(props.source) || {};
@@ -181,6 +187,14 @@ class SvgUri extends Component {
         }
     }
 
+    onPress(data) {
+
+        if (typeof this.props.onPress === 'function') {
+
+            this.props.onPress(data);
+        }
+    }
+
     createSVGElement(node, childs) {
         this.trimElementChilden(childs);
         let componentAtts = {};
@@ -202,6 +216,7 @@ class SvgUri extends Component {
                 );
             case "g":
                 componentAtts = this.obtainComponentAtts(node, G_ATTS);
+                
                 return (
                     <G key={i} {...componentAtts}>
                         {childs}
@@ -216,6 +231,7 @@ class SvgUri extends Component {
                 );
             case "circle":
                 componentAtts = this.obtainComponentAtts(node, CIRCLE_ATTS);
+
                 return (
                     <Circle key={i} {...componentAtts}>
                         {childs}
@@ -331,6 +347,13 @@ class SvgUri extends Component {
             }, {});
         Object.assign(componentAtts, styleAtts);
 
+        const id = componentAtts.id;
+        let hasPressHandler = id && this.shouldHandleClicks[id] !== undefined;
+
+        if (hasPressHandler) {
+            componentAtts.onPress = this.onPress.bind(this, id);
+        }
+
         return componentAtts;
     }
 
@@ -363,6 +386,7 @@ class SvgUri extends Component {
     }
 
     render() {
+
         try {
             if (this.state.svgXmlData == null) {
                 return null;
@@ -380,7 +404,9 @@ class SvgUri extends Component {
             const rootSVG = this.inspectNode(doc.childNodes[0]);
 
             return <View style={this.props.style}>{rootSVG}</View>;
+
         } catch (e) {
+
             console.error("ERROR SVG", e);
             return null;
         }
@@ -393,7 +419,7 @@ SvgUri.propTypes = {
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     svgXmlData: PropTypes.string,
     source: PropTypes.any,
-    fill: PropTypes.string
+    fill: PropTypes.string,
 };
 
 module.exports = SvgUri;
