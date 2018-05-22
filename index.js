@@ -47,9 +47,9 @@ const ACCEPTED_SVG_ELEMENTS = [
 
 // Attributes from SVG elements that are mapped directly.
 const SVG_ATTS = ["viewBox", "width", "height"];
-const G_ATTS = ["id", "fill", "textAnchor", "fontFamily"];
+const G_ATTS = ["textAnchor", "fontFamily"];
 
-const CIRCLE_ATTS = ["id", "cx", "cy", "r"];
+const CIRCLE_ATTS = ["cx", "cy", "r"];
 const PATH_ATTS = ["d"];
 const RECT_ATTS = ["width", "height", "rx", "ry"];
 const LINE_ATTS = ["x1", "y1", "x2", "y2"];
@@ -82,7 +82,8 @@ const COMMON_ATTS = [
     "originX",
     "originY",
     "stopOpacity",
-    "stopColor"
+    "stopColor",
+    "id"
 ];
 
 let ind = 0;
@@ -187,11 +188,11 @@ class SvgUri extends Component {
         }
     }
 
-    onPress(data) {
+    onPress(id, e) {
 
         if (typeof this.props.onPress === 'function') {
 
-            this.props.onPress(data);
+            this.props.onPress(id, e);
         }
     }
 
@@ -354,6 +355,19 @@ class SvgUri extends Component {
             componentAtts.onPress = this.onPress.bind(this, id);
         }
 
+        if (id && this.props.innerRef) {
+
+            componentAtts.ref = (c) => this.props.innerRef(c, id);
+        }
+
+        if (id && this.props.overrideProps && this.props.overrideProps[id]) {
+
+            for (let propName in this.props.overrideProps[id]) {
+
+                componentAtts[propName] = this.props.overrideProps[id][propName];
+            }
+        }
+
         return componentAtts;
     }
 
@@ -414,12 +428,13 @@ class SvgUri extends Component {
 }
 
 SvgUri.propTypes = {
-    style: PropTypes.object,
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     svgXmlData: PropTypes.string,
     source: PropTypes.any,
     fill: PropTypes.string,
+    overrideProps: PropTypes.object,
 };
 
 module.exports = SvgUri;
